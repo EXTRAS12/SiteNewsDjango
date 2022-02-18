@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+{{ news_detail.title }} :: {{ block.super }}
+{% endblock title %}
+
+{% block header %}
+<div class="cont">
+    <header>
+    <a href="/" class="logo">Облачко</a>
+    <ul>
+        <li><a href="/" class="active">Главная</a></li>
+        <li><a href="#popular">Популярное</a></li>
+        <li><a href="#category">Категории</a></li>
+        <li><a href="{% url 'contacts' %}">Контакты</a></li>
+
+    </ul>
+</header>
+<div class="content2">
+    {% if news_detail.photo %}
+<figure class="mb-4"><img class="img-fluid figure" src="{{ news_detail.photo.url }}" alt="{{ news_detail.title }}"/>
+</figure>
+{% else %}
+<figure class="mb-4"><img src="{% static 'img/medi.jpg' %}" class="img-fluid figure">
+</figure>
+{% endif %}
+    <div class="text-muted fst-italic mb-2">Автор: <strong>{{ news_detail.author }}</strong> </div>
+    <div class="text-muted fst-italic mb-2">Опубликовано {{ news_detail.created_at|date }} </div>
+    <div class="text-muted fst-italic mb-2">Кол-во просмотров: <strong>{{ news_detail.views }}</strong> </div>
+
+    <!-- Post categories-->
+    <a class="mb-2" href="{{ news_detail.category.get_absolute_url }}">{{ news_detail.category }}</a>
+    <br>
+
+    {% if news_detail.tags.exists %}
+        {% for tag in news_detail.tags.all %}
+       |<span><a href="{{ tag.get_absolute_url }}">{{ tag.title }}</a></span>|
+        {% endfor %}
+    {% endif %}
+    <br>
+    <h2 class="mb-5 mt-5">{{ news_detail.title }}</h2>
+    <p>
+            {{ news_detail.content|safe }}
+
+    </p>
+
+</div>
+<div class="imgBx">
+
+
+</div>
+<ul class="sci">
+    <li><a href="#"><img src="{% static 'img/facebook.png' %}"></a></li>
+    <li><a href="#"><img src="{% static 'img/twitter.png' %}"></a></li>
+    <li><a href="#"><img src="{% static 'img/instagram.png' %}"></a></li>
+</ul>
+    </div>
+{% endblock %}
+
+{% block lastNews %}
+{% endblock %}
+
+
+{% block content %}
+<div class="cont mb-5">
+<div class="content">
+    <h2>Glassmorphism UI</h2>
+    <p>
+        Science is an enterprise that should be cherished as an activity of the free human mind. Because it
+        transforms who we are, how we live, and it gives us an …
+        Science is an enterprise that should be cherished as an activity of the free human mind. Because it
+        transforms who we are, how we live, and it gives us an …
+    </p>
+    <a href="#" >Read More</a>
+</div>
+</div>
+{% endblock %}
+
+{% block comment %}
+{% if request.user.is_authenticated %}
+<!-- Comments section-->
+<section class="mb-5">
+    <div class="card bg-light">
+        <div class="card-body">
+
+            <!-- Comment form-->
+            <form action="" method="post">
+                {% csrf_token %}
+
+                {{ form.as_p }}
+
+                <button type="submit" class="btn btn-primary btn-block">Добавить комментарий</button>
+            </form>
+           <br>
+
+
+            {% for item in news_detail.comments.all %}
+            <!-- Single comment-->
+            <div class="d-flex">
+                <div class="flex-shrink-0"><img class="rounded-circle"
+                                                src="https://dummyimage.com/50x50/ced4da/6c757d.jpg"
+                                                alt="..."/></div>
+
+                <div class="ms-3">
+                    <div class="fw-bold">{{ item.name }}</div>
+
+                    {{ item.text }}
+
+                </div>
+
+            </div>
+            <br>
+        {% endfor %}
+
+        </div>
+    </div>
+</section>
+{% endif %}
+{% endblock comment %}

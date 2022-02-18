@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Поиск :: {{ block.super }}{% endblock %}
+
+
+{% block lastNews %}
+<div class="container mb-3" style="color: #8a2435;"><h1>Статьи по вашему запросу:</h1></div>
+
+{% endblock %}
+
+
+{% block content %}
+
+{% for item in news %}
+
+ <div class="blog-post mb-4">
+
+  <div class="col-md-6 mb-4">
+             <div class="blog-post__img">
+
+      {% if item.photo %}
+
+      <img src="{{ item.photo.url }}" alt="{{ item.title }}" class="img-fluid" />
+      {% else %}
+      <img src="{% static 'img/medi.jpg' %}" class="img-fluid">
+      {% endif %}
+             </div>
+
+  </div>
+  <div class="col-md-6 mb-4">
+    <div class="blog-post__info">
+
+    <div class="blog-post__date">
+    <span>{{ item.created_at|date }}</span>
+    </div>
+  <h1 class="blog-post__title">{{ item.title|truncatewords:8|striptags|safe }}</h1>
+   <span style="color: rgba(255,255,255);"> Категория: <a style="text-decoration: none; color: #8a2435;" href="{{ item.category.get_absolute_url }}">
+       {{ item.category }}</a><br></span>
+        <span style="color: rgba(255,255,255);"> Автор: </span> <span style="color: #8a2435">
+        {{ item.author }}</span>
+ <p class="blog-post__text">
+   {{ item.content|truncatewords:20|striptags|safe }}
+    </p>
+  <a href="{{ item.get_absolute_url }}" class="blog-post__cta">Читать дальше...</a>
+  </div>
+</div>
+</div>
+{% endfor %}
+{% endblock %}
+
+{% block pagination %}
+
+{% if page_obj.has_other_pages %}
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+
+    {% if page_obj.has_previous %}
+    <li class="page-item ">
+      <a class="page-link" href="?{{ s }}page={{ page_obj.previous_page_number }}" tabindex="-1" aria-disabled="true">Предыдущая</a>
+    </li>
+    {% endif %}
+      {% for p in page_obj.paginator.page_range %}
+        {% if page_obj.number == p %}
+      <li class="page-item active" aria-current="page">
+      <a class="page-link" href="?{{ s }}page={{ p }}"> {{ p }} <span class="sr-only"></span></a>
+    </li>
+        {% elif p > page_obj.number|add:-3 and p < page_obj.number|add:3 %}
+      <li class="page-item"><a class="page-link" href="?{{ s }}page={{ p }}">{{ p }}</a></li>
+        {% endif %}
+      {% endfor %}
+      {% if page_obj.has_next %}
+      <li class="page-item">
+      <a class="page-link" href="?{{ s }}page={{ page_obj.next_page_number }}">Следующая</a>
+    </li>
+      {% endif %}
+  </ul>
+</nav>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,134 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+    <title>Sidebar Menu</title>
+</head>
+<body>
+    <nav class="sidebar close">
+        <article>
+            <div class="image-text">
+                <span class="image">
+                    <img src="{% static 'img/logo.png' %}"alt="s">
+                </span>
+
+                <div class="text header-text">
+                    <span class="name">Coding lab</span>
+                    <span class="profession">Web Developer</span>
+                </div>
+
+            </div>
+
+            <i class='bx bx-chevron-right toggle'></i>
+
+        </article>
+        <div class="menu-bar">
+            <div class="menu">
+                <li class="search-box">
+
+                    <i class='bx bx-search-alt-2 icon' ></i>
+                    <form class="forms" action="{% url 'search' %}" method="get">
+                    <input type="text" name="s" placeholder="Найти...">
+                    </form>
+
+
+                </li>
+                <ul class="menu-links">
+                    <li class="nav_link">
+                        <a href="{% url 'home' %}">
+                            <i class='bx bx-home icon' ></i>
+                            <span class="text nav-text">Главная</span>
+                        </a>
+                    </li>
+
+                    {% if request.user.is_authenticated %}
+                    <li class="nav_link">
+                        <a href="{% url 'add_news' %}">
+                            <i class='bx bx-add-to-queue  icon' ></i>
+                            <span class="text nav-text">Добавить статью</span>
+                        </a>
+                    </li>
+                    {% else %}
+                     <li class="nav_link" style="opacity: 0.3;">
+                        <a href="{% url 'add_news' %}">
+                            <i class='bx bx-add-to-queue  icon' ></i>
+                            <span class="text nav-text">Добавить статью</span>
+                        </a>
+                    </li>
+                    {% endif %}
+                    <li class="nav_link">
+                        <a href="{% url 'contacts' %}">
+                            <i class='bx bx-message-rounded-dots icon'></i>
+                            <span class="text nav-text">Контакты</span>
+                        </a>
+                    </li>
+
+                    {% if request.user.is_authenticated %}
+                    <li class="nav_link">
+                        <a href="{% url 'my_post' %}">
+                            <i class='bx bx-pie-chart-alt icon' ></i>
+                            <span class="text nav-text">Мои статьи</span>
+                        </a>
+                    </li>
+                    {% else %}
+                    <li class="nav_link" style="opacity: 0.3;">
+                        <a href="{% url 'my_post' %}">
+                            <i class='bx bx-pie-chart-alt icon' ></i>
+                            <span class="text nav-text">Мои статьи</span>
+                        </a>
+                    </li>
+                    {% endif %}
+
+                </ul>
+            </div>
+
+            <div class="bottom-content">
+                {% if request.user.is_authenticated %}
+                <li class="">
+                    <i class='bx bxs-user-check icon' ></i>
+                    <span class="text nav-text">Добро пожаловать, <br>
+                        {{ user.username }}</span>
+                </li>
+                <li class="">
+                    <a href="{% url 'logout' %}">
+                            <i class='bx bx-log-out icon' ></i>
+                             <span class="text nav-text">Выйти</span>
+                        </a>
+                </li>
+                 {% else %}
+                <li class="">
+                    <a href="{% url 'login' %}">
+                        <i class='bx bx-log-in icon' ></i>
+                             <span class="text nav-text">Войти</span>
+                        </a>
+                </li>
+                <li class="">
+                    <a href="{% url 'signup' %}">
+                        <i class='bx bx-registered icon'></i>
+                             <span class="text nav-text">Регистрация</span>
+                        </a>
+                </li>
+                {% endif %}
+                <li class="mode">
+                    <div class="moon-sun">
+                        <i class='bx bx-moon icon moon' ></i>
+                        <i class='bx bx-sun icon sun' ></i>
+
+                    </div>
+                    <span class="mode-text text">Dark Mode</span>
+                    <div class="toggle-switch">
+                        <span class="switch"></span>
+                    </div>
+                </li>
+            </div>
+        </div>
+    </nav>
+
+
+</body>
+</html>

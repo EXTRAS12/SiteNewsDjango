@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{{ title }} :: {{ block.super }}{% endblock %}
+
+
+{% block content %}
+
+{% for item in news %}
+
+ <div class="blog-post mb-4">
+
+  <div class="col-md-6 mb-4">
+             <div class="blog-post__img">
+
+      {% if item.photo %}
+
+      <img src="{{ item.photo.url }}" alt="{{ item.title }}" class="img-fluid" />
+      {% else %}
+      <img src="{% static 'img/medi.jpg' %}" class="img-fluid">
+      {% endif %}
+             </div>
+
+  </div>
+  <div class="col-md-6 mb-4">
+    <div class="blog-post__info">
+
+    <div class="blog-post__date">
+    <span>{{ item.created_at|date }}</span>
+    </div>
+  <h1 class="blog-post__title">{{ item.title|truncatewords:8|striptags|safe }}</h1>
+   <span style="color: rgba(255,255,255);"> Категория: <a style="text-decoration: none; color: #8a2435;" href="{{ item.category.get_absolute_url }}">
+       {{ item.category }}</a><br></span>
+        <span style="color: rgba(255,255,255);"> Автор: </span> <span style="color: #8a2435">
+        {{ item.author }}</span>
+ <p class="blog-post__text">
+   {{ item.content|truncatewords:20|striptags|safe }}
+    </p>
+  <a href="{{ item.get_absolute_url }}" class="blog-post__cta">Читать дальше...</a>
+  </div>
+</div>
+</div>
+{% endfor %}
+
+{% endblock %}

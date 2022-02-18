@@ -1,0 +1,64 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <title>Glassmorphism login</title>
+</head>
+<body>
+<section>
+    <div class="color"></div>
+    <div class="color"></div>
+    <div class="color"></div>
+    <div class="box">
+        <div class="square" style="--i:0;"></div>
+        <div class="square" style="--i:1;"></div>
+        <div class="square" style="--i:2;"></div>
+        <div class="square" style="--i:3;"></div>
+        <div class="square" style="--i:4;"></div>
+        <div class="boxContainer">
+            <div class="form">
+                <h2>Регистрация</h2>
+                <form action="" method="post">
+                    {% csrf_token %}
+                  <div class="inputBox">
+                        <input type="text" placeholder="Ваш логин" name="username" maxlength="150" autocapitalize="none"
+                               autocomplete="username" autofocus="" required="" id="id_username">
+                  </div>
+                    <div class="inputBox">
+                    <input type="email" placeholder="email" name="email"  maxlength="254" id="id_email">
+                    </div>
+                    <div class="inputBox">
+                        <input type="password" placeholder="Введите пароль" name="password1" autocomplete="new-password" required=""
+                               id="id_password1">
+                  </div>
+
+                    <div class="inputBox">
+                        <input type="password" placeholder="Подтвердите пароль" name="password2" autocomplete="new-password" required=""
+                               id="id_password2">
+                  </div>
+                    <div class="inputBox">
+                    <p class="forget">Введите каптчу:</p>
+
+                        {{ form.captcha }}
+                    </div>
+                    <div class="inputBox">
+                        <input class="input2" type="submit" value="Регистрация">
+                        <input type="hidden" name="next" value="{{ next }}">
+                    </div>
+
+                    <p class="pp">Пароль должен содержать не менее 8 символов</p>
+                    <p class="forget">Вернуться на главную <a href="{% url 'home' %}">Нажмите</a></p>
+                    <p class="forget">У вас уже есть аккаунт? <a href="{% url 'login' %}">Войти</a></p>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>

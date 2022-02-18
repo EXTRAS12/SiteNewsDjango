@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+Добавить статью :: {{ block.super }}
+{% endblock title %}
+
+
+{% block header %}
+<div class="cont">
+    <div class="contForm">
+        <h2>Добавить статью</h2>
+        <form action="" class="uniForm" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="row100">
+                <div class="col">
+                    <div class="inputBox">
+                        {{ form.title }}
+                        <span class="text">Название статьи</span>
+                        <span class="line"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row100">
+                <div class="col">
+                    <div class="form-group">
+                        <h5 style="color: #707070">Категории:</h5>
+
+                        {{ form.category }}
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <h5 style="color: #707070">Теги:</h5>
+            {{ form.tags }}
+                    </div>
+                </div>
+            </div>
+            <div class="row100">
+                <div class="col">
+                    <div class="form-group">
+                        <h5 style="color: #707070">Фото:</h5>
+
+                        {{ form.photo }}
+                    </div>
+                </div>
+
+            </div>
+            <br>
+            <div class="row100">
+                <div class="col">
+                    <div class="form-group">
+                        <h5 style="color: #707070">Контент:</h5>
+                        {{ form.media }}
+                       {{ form.content }}
+                    </div>
+                </div>
+            </div>
+            <div class="row100">
+                <div class="col">
+                    <input type="submit" value="Отправить">
+                    <input type="hidden" name="author" value="{{ request.user.id }}">
+                    <br>
+                    <br>
+                    <span style="color: #707070">После отправки статья некоторое время будет на проверке</span>
+
+                </div>
+                <div class="col">
+                    {{ form.captcha }}
+
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block lastNews %}
+{% endblock %}
+
+{% block content %}
+<div class="cont mb-5">
+    <div class="content">
+        <h2>Glassmorphism UI</h2>
+        <p>
+            Science is an enterprise that should be cherished as an activity of the free human mind. Because it
+            transforms who we are, how we live, and it gives us an …
+            Science is an enterprise that should be cherished as an activity of the free human mind. Because it
+            transforms who we are, how we live, and it gives us an …
+        </p>
+        <a href="#">Read More</a>
+    </div>
+</div>
+{% endblock %}

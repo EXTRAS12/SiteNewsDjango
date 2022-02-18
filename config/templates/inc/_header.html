@@ -1,0 +1,32 @@
+{% load static %}
+    <div class="cont">
+
+<header>
+    <a href="/" class="logo">Облачко</a>
+    <ul>
+        <li><a href="/" class="active">Главная</a></li>
+        <li><a href="#popular">Популярное</a></li>
+        <li><a href="#category">Категории</a></li>
+        <li><a href="{% url 'contacts' %}">Контакты</a></li>
+
+    </ul>
+</header>
+        <div class="content">
+    <h2>Glassmorphism UI</h2>
+    <p>
+        Science is an enterprise that should be cherished as an activity of the free human mind. Because it
+        transforms who we are, how we live, and it gives us an …
+        Science is an enterprise that should be cherished as an activity of the free human mind. Because it
+        transforms who we are, how we live, and it gives us an …
+    </p>
+    <a href="#" >Read More</a>
+</div>
+<div class="imgBx">
+    <img src="{% static 'img/piramida.png' %}" alt="Пирамида">
+</div>
+<ul class="sci">
+    <li><a href="#"><img src="{% static 'img/facebook.png' %}"></a></li>
+    <li><a href="#"><img src="{% static 'img/twitter.png' %}"></a></li>
+    <li><a href="#"><img src="{% static 'img/instagram.png' %}"></a></li>
+</ul>
+    </div>

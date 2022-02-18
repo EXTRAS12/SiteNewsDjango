@@ -1,0 +1,16 @@
+{% load static %}
+<div class="card mb-4">
+    <div class="card-header"><h3>Поиск</h3></div>
+    <div class="card-body">
+        <div class="input-group">
+            <div class="knopa">
+            <form action="{% url 'search' %}" method="get">
+                <input type="text" class="searchbar" name="s" placeholder="Найти...">
+
+                  <button type="submit"><img src="{% static 'img/search.png' %}"
+                                             alt="search icon" class="button"></button>
+            </form>
+                </div>
+        </div>
+    </div>
+</div>

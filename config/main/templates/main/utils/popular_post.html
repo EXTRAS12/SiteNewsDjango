@@ -1,0 +1,19 @@
+{% load static %}
+<div class="card mb-4">
+    <div class="card-header" id="popular"><h3>Популярные посты</h3></div>
+        <div class="card-body">
+
+            {% for post in news %}
+            {% if post.photo %}
+            <img class="image" src="{{ post.photo.url }}" alt="{{ post.title }}">
+            {% else %}
+      <img class="image" src="{% static 'img/medi.jpg' %}"  />
+
+            {% endif %}
+        <div class="portfolio-text">
+            <h5><a href="{{ post.get_absolute_url }}">{{ post.title|truncatewords:6|striptags|safe }}</a></h5>
+            <p>{{ post.author }} <span>|</span>{{ post.created_at|date }}</p>
+        </div>
+            {% endfor %}
+    </div>
+</div>

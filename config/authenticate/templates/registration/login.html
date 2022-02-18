@@ -1,0 +1,51 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <title>Вход</title>
+</head>
+<body>
+<section>
+    <div class="color"></div>
+    <div class="color"></div>
+    <div class="color"></div>
+    <div class="box">
+        <div class="square" style="--i:0;"></div>
+        <div class="square" style="--i:1;"></div>
+        <div class="square" style="--i:2;"></div>
+        <div class="square" style="--i:3;"></div>
+        <div class="square" style="--i:4;"></div>
+        <div class="boxContainer">
+            <div class="form">
+                <h2>Вход на сайт</h2>
+                <form action="{% url 'login' %}" method="post">
+                    {% csrf_token %}
+                    {% if form.errors %}
+  <p>Неправильный логин или пароль. Попробуйте снова.</p>
+{% endif %}
+
+                    <div class="inputBox">
+                        <input type="text" placeholder="Ваше имя" name="username" autocomplete="username" id="id_username">
+                    </div>
+                    <div class="inputBox">
+                           <input type="password" placeholder="Ваш пароль" name="password" autocomplete="current-password" required="" id="id_password">
+                    </div>
+                    <div class="inputBox">
+                        <input type="submit" value="Войти">
+                        <input type="hidden" name="next" value="{{ next }}">
+                    </div>
+                    <p class="forget">Вернуться на главную <a href="{% url 'home' %}">Нажмите</a></p>
+                    <p class="forget">Нет аккаунта ? <a href="{% url 'signup' %}">Зарегистрироваться</a></p>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>

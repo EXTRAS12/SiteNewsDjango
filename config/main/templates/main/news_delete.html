@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Мои статьи :: {{ block.super }}{% endblock %}
+
+{% block header %}
+
+<div class="container" style="color: #8a2435;text-align: center;"><h1>Удаление статьи</h1>
+<form action="" method="post">
+    {% csrf_token %}
+    <button class="btn btn-danger" type="submit">Удалить</button>
+</form>
+</div>
+
+{% endblock %}
+
+{% block lastNews %}
+
+{% endblock %}
+
+{% block content %}
+
+
+{% endblock %}
+

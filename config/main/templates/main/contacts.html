@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% block title %}Контакты :: {{ block.super }}{% endblock title %}
+
+{% block header %}
+
+    <div class="contForm">
+        <h2>Отправьте сообщение</h2>
+         <form action="" method="post">
+             {% csrf_token %}
+    <div class="row100">
+        <div class="col">
+            <div class="inputBox">
+                <input type="text" name="name" required="required">
+                <span class="text">Ваше имя</span>
+                <span class="line"></span>
+            </div>
+        </div>
+        <div class="col">
+            <div class="inputBox">
+                <input type="email" name="email" required="required">
+                <span class="text">Email</span>
+                <span class="line"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="row100">
+        <div class="col">
+            <div class="inputBox textarea">
+                <textarea name="message" required="required"></textarea>
+                <span class="text">Напишите сообщение</span>
+                <span class="line"></span>
+            </div>
+        </div>
+    </div>
+    <div class="row100">
+        <div class="col">
+            <input type="submit" value="Отправить">
+            <input type="hidden" name="next" value="{{ next }}">
+        </div>
+    </div>
+             <div class="row100">
+        <div class="col">
+            {{ form.captcha }}
+        </div>
+    </div>
+         </form>
+            </div>
+
+{% endblock %}
+
+{% block lastNews %}
+{% endblock %}
+
+{% block content %}
+<div class="cont mb-5">
+<div class="content">
+    <h2>Glassmorphism UI</h2>
+    <p>
+        Science is an enterprise that should be cherished as an activity of the free human mind. Because it
+        transforms who we are, how we live, and it gives us an …
+        Science is an enterprise that should be cherished as an activity of the free human mind. Because it
+        transforms who we are, how we live, and it gives us an …
+    </p>
+    <a href="#" >Read More</a>
+</div>
+</div>
+{% endblock %}
